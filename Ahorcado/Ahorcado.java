@@ -6,29 +6,41 @@ public class Ahorcado {
     public static void main(String[] args) {/// Void
         Scanner teclado = new Scanner(System.in);
         int maxscore = 0;
-        int score1;
+        int score1 = 0;
         int score2 = 0;
         System.out.print("Ingrese el nombre del jugador 1: ");
         String j1 = teclado.next();
+        System.out.print("Ingrese el nombre del jugador 2: ");
+        String j2 = teclado.next();
 
         do {
-            score1 = jugador1();
-            score2 = jugador2();
-
+            score1 = jugador1(j1, j2, score1, score2);
+            if (score1 == 3) {
+                break;
+            }
+            score2 = jugador2(j1, j2, score1, score2);
+            
+            if (score2 < score1) {
+                maxscore = score1;
+            }else{
+                maxscore = score2;
+            }
         } while (maxscore < 3);
 
         if (score1 > score2) {
             System.out.println("Gana el jugador 1\nFelicidades " + j1);
+        }else{
+            System.out.println("Gana el jugador 2\nFelicidades " + j2);
         }
     }
 
-    private static int jugador1() {
+    private static int jugador1(String j1, String j2, int score1, int score2) {
         int puntuacion = 0;
         int fallosPermitidos = 6, fallos = 0, encontrados;
         String letra, PalabraAdivinar, letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
         Scanner teclado = new Scanner(System.in);
-
+        System.out.println("Turno de " + j1);
         do {
             adivinado = false;
             System.out.print("Introduce la palabra a adivinar: ");
@@ -54,9 +66,11 @@ public class Ahorcado {
 
             if (adivinado == false) {
                 System.out.println("Lo siento, estás tonto. \n Perdiste bro");
+                System.out.println("Puntuaciones \n" + j1 + " " + puntuacion + "\n" + j2 + " " + score2);
             } else {
                 puntuacion++;
                 System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
+                System.out.println("Puntuaciones \n" + j1 + " " + puntuacion + "\n" + j2 + " " + score2);
             }
 
         } while (adivinado == true && puntuacion < 3);
@@ -64,12 +78,13 @@ public class Ahorcado {
         return puntuacion;
     }
 
-    private static int jugador2() {
+    private static int jugador2(String j1, String j2, int score1, int score2) {
         int puntuacion = 0;
         int fallosPermitidos = 6, fallos = 0, encontrados;
         String letra, PalabraAdivinar, letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
         Scanner teclado = new Scanner(System.in);
+        System.out.println("Turno de: " + j2);
         do {
             adivinado = false;
             System.out.print("Introduce la palabra a adivinar: ");
@@ -99,9 +114,11 @@ public class Ahorcado {
 
             if (adivinado == false) {
                 System.out.println("Lo siento, estás tonto. \n Perdiste bro");
+                System.out.println("Puntuaciones \n" + j1 + " " + score1 + "\n" + j2 + " " + puntuacion);
             } else {
                 puntuacion++;
                 System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
+                System.out.println("Puntuaciones \n" + j1 + " " + score1 + "\n" + j2 + " " + puntuacion);
             }
 
         } while (adivinado == true && puntuacion < 3);
