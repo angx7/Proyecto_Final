@@ -1,14 +1,29 @@
 package Ahorcado;
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class Ahorcado {
+
+    public static boolean IsInteger(String text) {
+        int v;
+        try {
+            // Convierte la cadena de texto en un valor entero
+            v = Integer.parseInt(text);
+            return true;
+            // Si el usuario ingreso un caracter devuelve un false
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
     public static void main(String[] args) {/// Void
         Scanner teclado = new Scanner(System.in);
         String defaultcolor = "\u001B[37m";
         int maxscore = 0;
         int score1 = 0;
         int score2 = 0;
+        String j1 = "", j2 = "";
         limpiarConsola();
         // Instrucciones de juego
         System.out.println("\u001B[36m"
@@ -39,8 +54,23 @@ public class Ahorcado {
                 " 2. Cerrar\r\n\n"
                 + " -------------------------------------------------------------------------------------\r\n"
                 + defaultcolor);
-        int op = teclado.nextInt();
-
+        String option = teclado.next();
+        while (!IsInteger(option)) {
+            System.out.print(
+                    "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+            option = teclado.next();
+        }
+        int op = Integer.parseInt(option);
+        while (op == 0 || op > 2) {
+            System.out.println("Elige una opción válida");
+            option = teclado.next();
+            while (!IsInteger(option)) {
+                System.out.print(
+                        "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+                option = teclado.next();
+            }
+            op = Integer.parseInt(option);
+        }
         switch (op) {
             case 1:
                 limpiarConsola();
@@ -51,6 +81,125 @@ public class Ahorcado {
                         " 2. Animales\r\n 3. Frutas\r\n 4. Nombres de personas\r\n 5. Sitios Web\r\n\n"
                         + " -------------------------------------------------------------------------------------\r\n"
                         + defaultcolor);
+                option = teclado.next();
+                while (!IsInteger(option)) {
+                    System.out.print(
+                            "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+                    option = teclado.next();
+                }
+                op = Integer.parseInt(option);
+                while (op == 0 || op > 5) {
+                    System.out.println("Elige una opción válida");
+                    option = teclado.next();
+                    while (!IsInteger(option)) {
+                        System.out.print(
+                                "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+                        option = teclado.next();
+                    }
+                    op = Integer.parseInt(option);
+                }
+                switch (op) {
+                    case 1:
+                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        j1 = teclado.next();
+                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        j2 = teclado.next();
+
+                        do {
+                            score1 = jugador1(j1, j2, score1, score2, op);
+                            if (score1 == 3) {
+                                break;
+                            }
+                            score2 = jugador2(j1, j2, score1, score2, op);
+
+                            if (score2 < score1) {
+                                maxscore = score1;
+                            } else {
+                                maxscore = score2;
+                            }
+                        } while (maxscore < 3);
+                        break;
+                    case 2:
+                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        j1 = teclado.next();
+                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        j2 = teclado.next();
+
+                        do {
+                            score1 = jugador1(j1, j2, score1, score2, op);
+                            if (score1 == 3) {
+                                break;
+                            }
+                            score2 = jugador2(j1, j2, score1, score2, op);
+
+                            if (score2 < score1) {
+                                maxscore = score1;
+                            } else {
+                                maxscore = score2;
+                            }
+                        } while (maxscore < 3);
+                        break;
+                    case 3:
+                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        j1 = teclado.next();
+                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        j2 = teclado.next();
+
+                        do {
+                            score1 = jugador1(j1, j2, score1, score2, op);
+                            if (score1 == 3) {
+                                break;
+                            }
+                            score2 = jugador2(j1, j2, score1, score2, op);
+
+                            if (score2 < score1) {
+                                maxscore = score1;
+                            } else {
+                                maxscore = score2;
+                            }
+                        } while (maxscore < 3);
+                        break;
+                    case 4:
+                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        j1 = teclado.next();
+                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        j2 = teclado.next();
+
+                        do {
+                            score1 = jugador1(j1, j2, score1, score2, op);
+                            if (score1 == 3) {
+                                break;
+                            }
+                            score2 = jugador2(j1, j2, score1, score2, op);
+
+                            if (score2 < score1) {
+                                maxscore = score1;
+                            } else {
+                                maxscore = score2;
+                            }
+                        } while (maxscore < 3);
+                        break;
+                    case 5:
+                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        j1 = teclado.next();
+                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        j2 = teclado.next();
+
+                        do {
+                            score1 = jugador1(j1, j2, score1, score2, op);
+                            if (score1 == 3) {
+                                break;
+                            }
+                            score2 = jugador2(j1, j2, score1, score2, op);
+
+                            if (score2 < score1) {
+                                maxscore = score1;
+                            } else {
+                                maxscore = score2;
+                            }
+                        } while (maxscore < 3);
+                        break;
+                }
                 break;
             case 2:
                 limpiarConsola();
@@ -67,25 +216,6 @@ public class Ahorcado {
                 break;
         }
 
-        System.out.print("Ingrese el nombre del jugador 1: ");
-        String j1 = teclado.next();
-        System.out.print("Ingrese el nombre del jugador 2: ");
-        String j2 = teclado.next();
-
-        do {
-            score1 = jugador1(j1, j2, score1, score2);
-            if (score1 == 3) {
-                break;
-            }
-            score2 = jugador2(j1, j2, score1, score2);
-
-            if (score2 < score1) {
-                maxscore = score1;
-            } else {
-                maxscore = score2;
-            }
-        } while (maxscore < 3);
-
         if (score1 > score2) {
             System.out.println("Gana el jugador 1\nFelicidades " + j1);
         } else {
@@ -98,17 +228,51 @@ public class Ahorcado {
         System.out.print("\033[H");
     }
 
-    private static int jugador1(String j1, String j2, int score1, int score2) {
-        int puntuacion = score1;
-        int fallosPermitidos = 6, fallos = 0, encontrados;
-        String letra, PalabraAdivinar, letrasEncontradas = "", Mensaje = "";
+    private static int jugador1(String j1, String j2, int score1, int score2, int op) {
+        int puntuacion = score1, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
+        String letra, PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
+        Random random = new Random();
         Scanner teclado = new Scanner(System.in);
         System.out.println("Turno de " + j1);
+
+        // Diccionario del juego
+        String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja", "mono" };
+        String[] frutas = { "manzana", "pera", "plátano", "naranja", "uva", "sandia", "melon", "fresa", "piña","aguacate" };
+        String[] nombres = { "juan", "maria", "jose", "ana", "luis", "isabel", "pedro", "paula", "miguel", "daniela" };
+        String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp", "mercadolibre" };
+        String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida", "aguascalientes", "queretaro" };
+
         do {
             adivinado = false;
-            System.out.print("Introduce la palabra a adivinar: ");
-            PalabraAdivinar = teclado.next().toLowerCase();
+            switch (op) {
+                case 1:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = ciudadesMexico[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 2:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = animales[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 3:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = frutas[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 4:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = nombres[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 5:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = sitiosWeb[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+            }
+
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
             do {
                 System.out.print("Introduce una letra: ");
@@ -142,17 +306,51 @@ public class Ahorcado {
         return puntuacion;
     }
 
-    private static int jugador2(String j1, String j2, int score1, int score2) {
-        int puntuacion = score2;
-        int fallosPermitidos = 6, fallos = 0, encontrados;
-        String letra, PalabraAdivinar, letrasEncontradas = "", Mensaje = "";
+    private static int jugador2(String j1, String j2, int score1, int score2, int op) {
+        int puntuacion = score2, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
+        String letra, PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
+        Random random = new Random();
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Turno de: " + j2);
+        System.out.println("Turno de " + j2);
+
+        // Diccionario del juego
+        String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja", "mono" };
+        String[] frutas = { "manzana", "pera", "plátano", "naranja", "uva", "sandia", "melon", "fresa", "piña", "aguacate" };
+        String[] nombres = { "juan", "maria", "jose", "ana", "luis", "isabel", "pedro", "paula", "miguel", "daniela" };
+        String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp", "mercadolibre" };
+        String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida", "aguascalientes", "queretaro" };
+
         do {
             adivinado = false;
-            System.out.print("Introduce la palabra a adivinar: ");
-            PalabraAdivinar = teclado.next().toLowerCase();
+            switch (op) {
+                case 1:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = ciudadesMexico[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 2:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = animales[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 3:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = frutas[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 4:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = nombres[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+                case 5:
+                    numeroAleatorio = random.nextInt(10);
+                    PalabraAdivinar = sitiosWeb[numeroAleatorio];
+                    System.out.println(PalabraAdivinar);
+                    break;
+            }
+
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
             do {
                 System.out.print("Introduce una letra: ");
@@ -216,10 +414,4 @@ public class Ahorcado {
         }
         return actualizacionLetras;
     }
-
-    private static String dibujarAhorcado(int fallos) {
-        String dibujo = ".";
-        return dibujo;
-    }
-
 }
