@@ -14,13 +14,12 @@ public class Ahorcado {
         do {
             score1 = jugador1();
             score2 = jugador2();
-            
+
         } while (maxscore < 3);
 
         if (score1 > score2) {
             System.out.println("Gana el jugador 1\nFelicidades " + j1);
         }
-        teclado.close();
     }
 
     private static int jugador1() {
@@ -57,13 +56,11 @@ public class Ahorcado {
                 System.out.println("Lo siento, estás tonto. \n Perdiste bro");
             } else {
                 puntuacion++;
-                System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos " );
+                System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
             }
-        
+
         } while (adivinado == true && puntuacion < 3);
 
-        
-        teclado.close();
         return puntuacion;
     }
 
@@ -76,7 +73,11 @@ public class Ahorcado {
         do {
             adivinado = false;
             System.out.print("Introduce la palabra a adivinar: ");
-            PalabraAdivinar = teclado.next().toLowerCase();
+            if (!teclado.hasNext()) {
+                System.out.println("No has introducido ninguna letra.");
+            }
+            System.out.println(" ");
+            PalabraAdivinar = teclado.nextLine().toLowerCase();
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
             do {
                 System.out.print("Introduce una letra: ");
@@ -100,13 +101,11 @@ public class Ahorcado {
                 System.out.println("Lo siento, estás tonto. \n Perdiste bro");
             } else {
                 puntuacion++;
-                System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos " );
+                System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
             }
-        
+
         } while (adivinado == true && puntuacion < 3);
 
-        
-        teclado.close();
         return puntuacion;
     }
 
