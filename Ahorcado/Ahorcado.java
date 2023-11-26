@@ -19,23 +19,23 @@ public class Ahorcado {
                 break;
             }
             score2 = jugador2(j1, j2, score1, score2);
-            
+
             if (score2 < score1) {
                 maxscore = score1;
-            }else{
+            } else {
                 maxscore = score2;
             }
         } while (maxscore < 3);
 
         if (score1 > score2) {
             System.out.println("Gana el jugador 1\nFelicidades " + j1);
-        }else{
+        } else {
             System.out.println("Gana el jugador 2\nFelicidades " + j2);
         }
     }
 
     private static int jugador1(String j1, String j2, int score1, int score2) {
-        int puntuacion = 0;
+        int puntuacion = score1;
         int fallosPermitidos = 6, fallos = 0, encontrados;
         String letra, PalabraAdivinar, letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
@@ -79,7 +79,7 @@ public class Ahorcado {
     }
 
     private static int jugador2(String j1, String j2, int score1, int score2) {
-        int puntuacion = 0;
+        int puntuacion = score2;
         int fallosPermitidos = 6, fallos = 0, encontrados;
         String letra, PalabraAdivinar, letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
@@ -88,11 +88,7 @@ public class Ahorcado {
         do {
             adivinado = false;
             System.out.print("Introduce la palabra a adivinar: ");
-            if (!teclado.hasNext()) {
-                System.out.println("No has introducido ninguna letra.");
-            }
-            System.out.println(" ");
-            PalabraAdivinar = teclado.nextLine().toLowerCase();
+            PalabraAdivinar = teclado.next().toLowerCase();
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
             do {
                 System.out.print("Introduce una letra: ");
