@@ -241,7 +241,7 @@ public class Ahorcado {
         String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
        
-        letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
+        //letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
         Scanner teclado = new Scanner(System.in);
         System.out.println("Turno de " + j1);
@@ -332,16 +332,18 @@ public class Ahorcado {
     private static int jugador2(String j1, String j2, int score1, int score2, int op) {
         
         int puntuacion = score2, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
-        String letra, PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
+        char letra; 
+        String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
-        letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
+       
+        //letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
         Scanner teclado = new Scanner(System.in);
         System.out.println("Turno de " + j2);
 
         // Diccionario del juego
         String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja", "mono" };
-        String[] frutas = { "manzana", "pera", "plátano", "naranja", "uva", "sandia", "melon", "fresa", "piña", "aguacate" };
+        String[] frutas = { "manzana", "pera", "platano", "naranja", "uva", "sandia", "melon", "fresa", "mandarina","aguacate" };
         String[] nombres = { "juan", "maria", "jose", "ana", "luis", "isabel", "pedro", "paula", "miguel", "daniela" };
         String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp", "mercadolibre" };
         String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida", "aguascalientes", "queretaro" };
@@ -376,18 +378,30 @@ public class Ahorcado {
                     break;
             }
 
-            letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
-            do {
-                System.out.print("Introduce una letra: ");
-                letra = teclado.next().toLowerCase();
-                encontrados = actualizarFallos(PalabraAdivinar, letra);
-                if (encontrados == 0) {
-                    fallos++;
+           letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
+            
+           do {
+            System.out.print("Introduce una letra: ");
+            String entrada = teclado.next().toLowerCase();
+            letra = entrada.charAt(0);
+        if (letrasIngresadas[letra - 'a']) {
+                    System.out.println("Ya has ingresado esa letra. Intenta con otra.");
+                    continue; // Vuelve al inicio del bucle sin procesar el resto del código
+                } else {
+                    letrasIngresadas[letra - 'a'] = true; // Marca la letra como ingresada
                 }
-                Mensaje += "La palabra contiene " + encontrados + " '" + letra.charAt(0) + "' en la palabra buscada";
+            
+            encontrados = actualizarFallos(PalabraAdivinar, letra);
+            if (encontrados == 0) {
+                fallos++;
+            }
+                //intento de verificacion de letras
+                
+                
+                Mensaje += "La palabra contiene " + encontrados + " '" + letra + "' en la palabra buscada";
                 Mensaje += "\n" + "Te restan " + (6 - fallos) + " intentos";
                 letrasEncontradas = actualizarLetrasEncontradas(PalabraAdivinar, letra, letrasEncontradas);
-                Mensaje += "\nletras encontradas: " + letrasEncontradas;
+                Mensaje += "\n letras encontradas: " + letrasEncontradas;
                 System.out.println(Mensaje);
                 Mensaje = "";
                 if (PalabraAdivinar.equals(letrasEncontradas)) {
@@ -405,9 +419,8 @@ public class Ahorcado {
             }
             Arrays.fill(letrasIngresadas, false);
         } while (adivinado == true && puntuacion < 3);
-
        
-      
+        
         return puntuacion;
     }
 
