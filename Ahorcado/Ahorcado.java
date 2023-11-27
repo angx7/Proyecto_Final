@@ -237,11 +237,15 @@ public class Ahorcado {
         System.out.println("Turno de " + j1);
 
         // Diccionario del juego
-        String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja", "mono" };
-        String[] frutas = { "manzana", "pera", "plátano", "naranja", "uva", "sandia", "melon", "fresa", "piña","aguacate" };
+        String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja",
+                "mono" };
+        String[] frutas = { "manzana", "pera", "plátano", "naranja", "uva", "sandia", "melon", "fresa", "piña",
+                "aguacate" };
         String[] nombres = { "juan", "maria", "jose", "ana", "luis", "isabel", "pedro", "paula", "miguel", "daniela" };
-        String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp", "mercadolibre" };
-        String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida", "aguascalientes", "queretaro" };
+        String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp",
+                "mercadolibre" };
+        String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida",
+                "aguascalientes", "queretaro" };
 
         do {
             adivinado = false;
@@ -315,11 +319,15 @@ public class Ahorcado {
         System.out.println("Turno de " + j2);
 
         // Diccionario del juego
-        String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja", "mono" };
-        String[] frutas = { "manzana", "pera", "plátano", "naranja", "uva", "sandia", "melon", "fresa", "piña", "aguacate" };
+        String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja",
+                "mono" };
+        String[] frutas = { "manzana", "pera", "platano", "naranja", "uva", "sandia", "melon", "fresa", "piña",
+                "aguacate" };
         String[] nombres = { "juan", "maria", "jose", "ana", "luis", "isabel", "pedro", "paula", "miguel", "daniela" };
-        String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp", "mercadolibre" };
-        String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida", "aguascalientes", "queretaro" };
+        String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp",
+                "mercadolibre", "reddit" };
+        String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida",
+                "aguascalientes", "queretaro" };
 
         do {
             adivinado = false;
