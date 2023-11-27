@@ -3,6 +3,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
+// Adios tonotos
+
 public class Ahorcado {
     private static boolean[] letrasIngresadas = new boolean[26];
     public static boolean IsInteger(String text) {
@@ -329,11 +331,9 @@ public class Ahorcado {
 
     private static int jugador2(String j1, String j2, int score1, int score2, int op) {
         
-        int puntuacion = score2, fallosPermitidos = 6, fallos = 0, numeroAleatorio;
-        char encontrados;
+        int puntuacion = score2, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
         String letra, PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
         boolean adivinado = false;
-
         letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
         Scanner teclado = new Scanner(System.in);
