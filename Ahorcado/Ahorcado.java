@@ -14,6 +14,9 @@ public class Ahorcado {
         try {
             // Convierte la cadena de texto en un valor entero
             v = Integer.parseInt(text);
+            if (v < 0) {
+                return false;
+            }
             return true;
             // Si el usuario ingreso un caracter devuelve un false
         } catch (NumberFormatException ex) {
@@ -261,6 +264,7 @@ public class Ahorcado {
                     System.out.println("\n\n Presiona enter para continuar...");
                     teclado.nextLine();
                     limpiarConsola();
+                    teclado.close();
                     System.exit(0);
                     break;
             }
