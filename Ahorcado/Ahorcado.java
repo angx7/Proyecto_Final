@@ -406,6 +406,75 @@ public class Ahorcado {
             do {
                 System.out.print("Introduce una letra: ");
                 String entrada = teclado.next().toLowerCase();
+
+
+                //Scanner scanner = new Scanner(System.in);
+
+                System.out.println("Ingrese una letra de la 'a' a la 'z':");
+                char inputChar;
+        
+                while (true) {
+                    String userInput = teclado.next();
+        
+                    if (userInput.length() == 1 &&
+                            Character.isLetter(userInput.charAt(0)) &&
+                            Character.isLowerCase(userInput.charAt(0))) {
+                        // La entrada es una letra minúscula
+                        inputChar = userInput.charAt(0);
+                        break;
+                    } else {
+                        System.out.println("Entrada inválida. Intente nuevamente.");
+                    }
+                }
+        
+                System.out.println("Has ingresado la letra: " + inputChar);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 letra = entrada.charAt(0);
                 if (letrasIngresadas[letra - 'a']) {
                     System.out.println("Ya has ingresado esa letra. Intenta con otra.");
