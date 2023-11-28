@@ -16,7 +16,6 @@ public class Ahorcado {
             return false;
         }
     }
-
     public static void main(String[] args) {/// Void
         Scanner teclado = new Scanner(System.in);
         String defaultcolor = "\u001B[37m";
