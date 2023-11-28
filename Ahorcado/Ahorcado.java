@@ -4,11 +4,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
-// Adios tonotos
-
 public class Ahorcado {
     private static boolean[] letrasIngresadas = new boolean[26];
 
+    // Método para validar solo números
     public static boolean IsInteger(String text) {
         int v;
         try {
@@ -21,14 +20,27 @@ public class Ahorcado {
         }
     }
 
+    // Método para válidar solo letras
+    public static char Esletra() {
+        Scanner teclado = new Scanner(System.in);
+        char inputChar;
+        while (true) {
+            String userInput = teclado.next();
+            if (userInput.length() == 1 && Character.isLetter(userInput.charAt(0))
+                    && Character.isLowerCase(userInput.charAt(0))) {
+                inputChar = userInput.charAt(0);
+                break;
+            } else {
+                System.out.print("\u001B[31mEs una entrada inválida.\nIntente de nuevo: \u001B[37m");
+            }
+        }
+        return inputChar;
+    }
+
     public static void main(String[] args) {/// Void
         Scanner teclado = new Scanner(System.in);
+        int op;
         String defaultcolor = "\u001B[37m";
-
-        int maxscore = 0;
-        int score1 = 0;
-        int score2 = 0;
-        String j1 = "", j2 = "";
         limpiarConsola();
         // Instrucciones de juego
         System.out.println("\u001B[36m"
@@ -52,194 +64,216 @@ public class Ahorcado {
         limpiarConsola();
 
         // Menú de inicio
-        System.out.println("\u001B[31m"
-                + " -------------------------------------------------------------------------------------\r\n"
-                +
-                "\t\t\t\tMenú\n\n 1. Iniciar\r\n" +
-                " 2. Cerrar\r\n\n"
-                + " -------------------------------------------------------------------------------------\r\n"
-                + defaultcolor);
-        String option = teclado.next();
-        while (!IsInteger(option)) {
-            System.out.print(
-                    "El valor ingresado no es un entero\n\nIntente nuevamente: ");
-            option = teclado.next();
-        }
-        int op = Integer.parseInt(option);
-        while (op == 0 || op > 2) {
-            System.out.println("Elige una opción válida");
-            option = teclado.next();
+        do {
+            int maxscore = 0;
+            int score1 = 0;
+            int score2 = 0;
+            String j1 = "", j2 = "";
+            System.out.println("\u001B[31m"
+                    + " -------------------------------------------------------------------------------------\r\n"
+                    +
+                    "\t\t\t\tMenú\n\n 1. Iniciar\r\n" +
+                    " 2. Cerrar\r\n\n"
+                    + " -------------------------------------------------------------------------------------\r\n"
+                    + defaultcolor);
+            String option = teclado.next();
             while (!IsInteger(option)) {
                 System.out.print(
                         "El valor ingresado no es un entero\n\nIntente nuevamente: ");
                 option = teclado.next();
             }
             op = Integer.parseInt(option);
-        }
-        switch (op) {
-            case 1:
-                limpiarConsola();
-                System.out.println("\u001B[32m"
-                        + " -------------------------------------------------------------------------------------\r\n"
-                        +
-                        "\t\t\t\tMenú de temáticas\n\n 1. Ciudades de México\r\n" +
-                        " 2. Animales\r\n 3. Frutas\r\n 4. Nombres de personas\r\n 5. Sitios Web\r\n\n"
-                        + " -------------------------------------------------------------------------------------\r\n"
-                        + defaultcolor);
+            while (op == 0 || op > 2) {
+                System.out.println("Elige una opción válida");
                 option = teclado.next();
-                limpiarConsola();
                 while (!IsInteger(option)) {
                     System.out.print(
                             "El valor ingresado no es un entero\n\nIntente nuevamente: ");
                     option = teclado.next();
                 }
                 op = Integer.parseInt(option);
-                while (op == 0 || op > 5) {
-                    System.out.println("Elige una opción válida");
+            }
+            switch (op) {
+                case 1:
+                    limpiarConsola();
+                    System.out.println("\u001B[32m"
+                            + " -------------------------------------------------------------------------------------\r\n"
+                            +
+                            "\t\t\t\tMenú de temáticas\n\n 1. Ciudades de México\r\n" +
+                            " 2. Animales\r\n 3. Frutas\r\n 4. Nombres de personas\r\n 5. Sitios Web\r\n\n"
+                            + " -------------------------------------------------------------------------------------\r\n"
+                            + defaultcolor);
                     option = teclado.next();
                     while (!IsInteger(option)) {
-                        System.out.print(
-                                "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+                        System.out.print("\u001B[31m" +
+                                "El valor ingresado no es un entero\n\nIntente nuevamente: " + defaultcolor);
                         option = teclado.next();
                     }
                     op = Integer.parseInt(option);
-                }
+                    while (op == 0 || op > 5) {
+                        System.out.println("Elige una opción válida");
+                        option = teclado.next();
+                        while (!IsInteger(option)) {
+                            System.out.print(
+                                    "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+                            option = teclado.next();
+                        }
+                        op = Integer.parseInt(option);
+                    }
 
-                switch (op) {
-                    case 1:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                    switch (op) {
+                        case 1:
+                            limpiarConsola();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
+                            limpiarConsola();
 
-                        do {
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
-                            score2 = jugador2(j1, j2, score1, score2, op);
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 2:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 2:
+                            limpiarConsola();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
+                            limpiarConsola();
 
-                        do {
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
-                            score2 = jugador2(j1, j2, score1, score2, op);
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 3:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 3:
+                            limpiarConsola();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
+                            limpiarConsola();
 
-                        do {
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
-                            score2 = jugador2(j1, j2, score1, score2, op);
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 4:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 4:
+                            limpiarConsola();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
+                            limpiarConsola();
 
-                        do {
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
-                            score2 = jugador2(j1, j2, score1, score2, op);
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 5:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 5:
+                            limpiarConsola();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
+                            limpiarConsola();
 
-                        do {
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
-                            score2 = jugador2(j1, j2, score1, score2, op);
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                }
-                break;
-            case 2:
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                    }
+                    break;
+                case 2:
+                    limpiarConsola();
+                    System.out.println("Gracias por jugar\n");
+                    System.out.println("Presiona enter para continuar...");
+                    teclado.nextLine();
+                    teclado.nextLine();
+
+                    limpiarConsola();
+                    System.out.println(
+                            "\t\t\t\tCréditos\n\n* Angel Alejandro Becerra Rojas\r\n* Christian Axel Moreno Flores\r\n* Andrés Aguilera Hernández");
+                    System.out.println("\n\n Presiona enter para continuar...");
+                    teclado.nextLine();
+                    limpiarConsola();
+                    System.exit(0);
+                    break;
+            }
+
+            if (score1 > score2) {
                 limpiarConsola();
-                System.out.println("Gracias por jugar\n");
-                System.out.println("Presiona enter para continuar...");
-                teclado.nextLine();
-                teclado.nextLine();
-
+                System.out.println("\u001B[33m" + "Gana el jugador 1\n\nFelicidades " + j1 +
+                        "\u001B[31m" + "\n\nSuerte para la proxima " + j2 + defaultcolor);
+            } else {
                 limpiarConsola();
-                System.out.println(
-                        "\t\t\t\tCréditos\n\n* Angel Alejandro Becerra Rojas\r\n* Christian Axel Moreno Flores\r\n* Andrés Aguilera Hernández");
-                System.out.println("\n\n Presiona enter para continuar...");
-                teclado.nextLine();
-                limpiarConsola();
-                System.exit(0);
-                break;
-        }
-
-        if (score1 > score2) {
-            System.out.println("Gana el jugador 1\nFelicidades " + j1);
-        } else {
-            System.out.println("Gana el jugador 2\nFelicidades " + j2);
-        }
+                System.out.println("\u001B[33m" + "Gana el jugador 2\n\nFelicidades " + j2 +
+                        "\u001B[31m" + "\n\nSuerte para la proxima " + j1 + defaultcolor);
+            }
+            System.out.println("\n\n Presiona enter para continuar...");
+            teclado.nextLine(); teclado.nextLine();
+            limpiarConsola();
+        } while (op == 1);
     }
 
     private static void limpiarConsola() {
@@ -257,8 +291,9 @@ public class Ahorcado {
         // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
         Scanner teclado = new Scanner(System.in);
-        System.out.println("\u001B[32m" + "Turno de " + j1 +
+        System.out.println("\u001B[32mTurno de " + j1 +
                 "\n----------------------- \n" + defaultcolor);
+        System.out.println("\u001B[31mTienes 6 intentos\n" + defaultcolor);
 
         // Diccionario del juego
         String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja",
@@ -277,54 +312,52 @@ public class Ahorcado {
                 case 1:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = ciudadesMexico[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 2:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = animales[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 3:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = frutas[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 4:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = nombres[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 5:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = sitiosWeb[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
             }
 
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
 
             do {
-                System.out.print("Introduce una letra: ");
-                String entrada = teclado.next().toLowerCase();
+
+                System.out.print("\u001B[35mIntroduce una letra: " + defaultcolor);
+                String entrada = "" + Esletra();
+                // teclado.next().toLowerCase();
                 letra = entrada.charAt(0);
                 if (letrasIngresadas[letra - 'a']) {
-                    System.out.println("Ya has ingresado esa letra. Intenta con otra.");
+                    System.out.print("\u001B[31mYa has ingresado esa letra.\nIntenta con otra\n" + defaultcolor);
                     continue; // Vuelve al inicio del bucle sin procesar el resto del código
                 } else {
                     letrasIngresadas[letra - 'a'] = true; // Marca la letra como ingresada
                 }
 
                 encontrados = actualizarFallos(PalabraAdivinar, letra);
+                // intento de verificacion de letras
+
+                Mensaje += "\u001B[32m" + "\nLa palabra contiene " + encontrados + " '" + letra
+                        + "' en la palabra buscada\n" + defaultcolor;
                 if (encontrados == 0) {
                     fallos++;
-                }
-                // intento de verificacion de letras
-                Mensaje += "La palabra contiene " + encontrados + " '" + letra + "' en la palabra buscada";
-                if (encontrados == 0) {
-                    Mensaje += "\n" + "Te restan " + (6 - fallos) + " intentos";
+                    Mensaje += "\u001B[31m" + "\n" + "Te restan " + (6 - fallos) + " intentos\n" + defaultcolor;
                 }
                 letrasEncontradas = actualizarLetrasEncontradas(PalabraAdivinar, letra, letrasEncontradas);
-                Mensaje += "\nLetras encontradas: " + letrasEncontradas;
+                Mensaje += "\u001B[32m" + "\nLetras encontradas: " + defaultcolor + letrasEncontradas + "\n" +
+                        "\u001B[32m" + "\n----------------------- \n\n" + defaultcolor;
                 System.out.println(Mensaje);
                 Mensaje = "";
                 if (PalabraAdivinar.equals(letrasEncontradas)) {
@@ -333,12 +366,22 @@ public class Ahorcado {
             } while (fallos < fallosPermitidos && adivinado == false);
 
             if (adivinado == false) {
-                System.out.println("Lo siento, estás tonto. \n Perdiste bro");
-                System.out.println("Puntuaciones \n" + j1 + " " + puntuacion + "\n" + j2 + " " + score2);
+                System.out.println("\u001B[31m" + "Fin de tu turno\n" + "\u001B[32m" + "\n\nLa palabra oculta era: "
+                        + PalabraAdivinar + defaultcolor);
+                System.out.println("\u001B[33m" + "\nPuntuaciones \n" + j1 + " " + puntuacion + "\n" + j2 + " " + score2
+                        + defaultcolor);
+                System.out.println("\n\nPresiona enter para continuar...");
+                teclado.nextLine();
+                teclado.nextLine();
             } else {
                 puntuacion++;
-                System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
-                System.out.println("Puntuaciones \n" + j1 + " " + puntuacion + "\n" + j2 + " " + score2);
+                fallos = 0;
+                System.out.println("\u001B[33m" + "Felicidades acertaste\n" + defaultcolor);
+                System.out.println("\u001B[33m" + "Puntuaciones \n" + j1 + " " + puntuacion + "\n" + j2 + " " + score2
+                        + defaultcolor);
+                System.out.println("\n\nPresiona enter para continuar...");
+                teclado.nextLine();
+                teclado.nextLine();
             }
             Arrays.fill(letrasIngresadas, false);
         } while (adivinado == true && puntuacion < 3);
@@ -351,14 +394,14 @@ public class Ahorcado {
         int puntuacion = score2, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
         char letra;
         String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "", defaultcolor = "\u001B[37m";
-        ;
         boolean adivinado = false;
 
         // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
         Scanner teclado = new Scanner(System.in);
         System.out.println("\u001B[32m" + "Turno de " + j2 +
-                "\n----------------------- \n\n" + defaultcolor);
+                "\n----------------------- \n" + defaultcolor);
+        System.out.println("\u001B[31m" + "Tienes " + (6) + " intentos\n" + defaultcolor);
 
         // Diccionario del juego
         String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja",
@@ -377,124 +420,52 @@ public class Ahorcado {
                 case 1:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = ciudadesMexico[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 2:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = animales[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 3:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = frutas[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 4:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = nombres[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
                     break;
                 case 5:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = sitiosWeb[numeroAleatorio];
-                    System.out.println(PalabraAdivinar);
+
                     break;
             }
 
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
 
             do {
-                System.out.print("Introduce una letra: ");
-                String entrada = teclado.next().toLowerCase();
 
-
-                //Scanner scanner = new Scanner(System.in);
-
-                System.out.println("Ingrese una letra de la 'a' a la 'z':");
-                char inputChar;
-        
-                while (true) {
-                    String userInput = teclado.next();
-        
-                    if (userInput.length() == 1 &&
-                            Character.isLetter(userInput.charAt(0)) &&
-                            Character.isLowerCase(userInput.charAt(0))) {
-                        // La entrada es una letra minúscula
-                        inputChar = userInput.charAt(0);
-                        break;
-                    } else {
-                        System.out.println("Entrada inválida. Intente nuevamente.");
-                    }
-                }
-        
-                System.out.println("Has ingresado la letra: " + inputChar);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                System.out.print("\u001B[35m" + "Introduce una letra: " + defaultcolor);
+                String entrada = "" + Esletra();
                 letra = entrada.charAt(0);
                 if (letrasIngresadas[letra - 'a']) {
-                    System.out.println("Ya has ingresado esa letra. Intenta con otra.");
+                    System.out.print("\u001B[31m" + "Ya has ingresado esa letra.\nIntenta con otra\n " + defaultcolor);
                     continue; // Vuelve al inicio del bucle sin procesar el resto del código
                 } else {
                     letrasIngresadas[letra - 'a'] = true; // Marca la letra como ingresada
                 }
 
                 encontrados = actualizarFallos(PalabraAdivinar, letra);
-                if (encontrados == 0) {
-                    fallos++;
-                }
                 // intento de verificacion de letras
 
-                Mensaje += "La palabra contiene " + encontrados + " '" + letra + "' en la palabra buscada";
+                Mensaje += "\u001B[32m" + "\nLa palabra contiene " + encontrados + " '" + letra
+                        + "' en la palabra buscada\n" + defaultcolor;
                 if (encontrados == 0) {
-                    Mensaje += "\n" + "Te restan " + (6 - fallos) + " intentos";
+                    fallos++;
+                    Mensaje += "\u001B[31m" + "\n" + "Te restan " + (6 - fallos) + " intentos\n" + defaultcolor;
                 }
                 letrasEncontradas = actualizarLetrasEncontradas(PalabraAdivinar, letra, letrasEncontradas);
-                Mensaje += "\n letras encontradas: " + letrasEncontradas;
+                Mensaje += "\u001B[32m" + "\nLetras encontradas: " + defaultcolor + letrasEncontradas + "\n" +
+                        "\u001B[32m" + "\n----------------------- \n\n" + defaultcolor;
                 System.out.println(Mensaje);
                 Mensaje = "";
                 if (PalabraAdivinar.equals(letrasEncontradas)) {
@@ -503,12 +474,22 @@ public class Ahorcado {
             } while (fallos < fallosPermitidos && adivinado == false);
 
             if (adivinado == false) {
-                System.out.println("Lo siento, estás tonto. \n Perdiste bro");
-                System.out.println("Puntuaciones \n" + j1 + " " + score1 + "\n" + j2 + " " + puntuacion);
+                System.out.println("\u001B[31m" + "Fin de tu turno\n" + "\u001B[32m" + "\n\nLa palabra oculta era: "
+                        + PalabraAdivinar + defaultcolor);
+                System.out.println("\u001B[33m" + "\nPuntuaciones \n" + j1 + " " + score1 + "\n" + j2 + " " + puntuacion
+                        + defaultcolor);
+                System.out.println("\n\nPresiona enter para continuar...");
+                teclado.nextLine();
+                teclado.nextLine();
             } else {
                 puntuacion++;
-                System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
-                System.out.println("Puntuaciones \n" + j1 + " " + score1 + "\n" + j2 + " " + puntuacion);
+                fallos = 0;
+                System.out.println("\u001B[33m" + "Felicidades acertaste\n" + defaultcolor);
+                System.out.println("\u001B[33m" + "Puntuaciones \n" + j1 + " " + score1 + "\n" + j2 + " " + puntuacion
+                        + defaultcolor);
+                System.out.println("\n\nPresiona enter para continuar...");
+                teclado.nextLine();
+                teclado.nextLine();
             }
             Arrays.fill(letrasIngresadas, false);
         } while (adivinado == true && puntuacion < 3);
@@ -542,8 +523,8 @@ public class Ahorcado {
             } else {
                 actualizacionLetras += letrasEncontradas.charAt(i);
             }
-
         }
         return actualizacionLetras;
     }
+
 }
