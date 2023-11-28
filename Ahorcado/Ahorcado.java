@@ -1,9 +1,13 @@
 package Ahorcado;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
+// Adios tonotos
+
 public class Ahorcado {
+    private static boolean[] letrasIngresadas = new boolean[26];
 
     public static boolean IsInteger(String text) {
         int v;
@@ -16,9 +20,11 @@ public class Ahorcado {
             return false;
         }
     }
+
     public static void main(String[] args) {/// Void
         Scanner teclado = new Scanner(System.in);
         String defaultcolor = "\u001B[37m";
+
         int maxscore = 0;
         int score1 = 0;
         int score2 = 0;
@@ -81,6 +87,7 @@ public class Ahorcado {
                         + " -------------------------------------------------------------------------------------\r\n"
                         + defaultcolor);
                 option = teclado.next();
+                limpiarConsola();
                 while (!IsInteger(option)) {
                     System.out.print(
                             "El valor ingresado no es un entero\n\nIntente nuevamente: ");
@@ -97,12 +104,15 @@ public class Ahorcado {
                     }
                     op = Integer.parseInt(option);
                 }
+
                 switch (op) {
                     case 1:
-                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        limpiarConsola();
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
                         j1 = teclado.next();
-                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
                         j2 = teclado.next();
+                        limpiarConsola();
 
                         do {
                             score1 = jugador1(j1, j2, score1, score2, op);
@@ -119,10 +129,12 @@ public class Ahorcado {
                         } while (maxscore < 3);
                         break;
                     case 2:
-                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        limpiarConsola();
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
                         j1 = teclado.next();
-                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
                         j2 = teclado.next();
+                        limpiarConsola();
 
                         do {
                             score1 = jugador1(j1, j2, score1, score2, op);
@@ -139,10 +151,12 @@ public class Ahorcado {
                         } while (maxscore < 3);
                         break;
                     case 3:
-                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        limpiarConsola();
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
                         j1 = teclado.next();
-                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
                         j2 = teclado.next();
+                        limpiarConsola();
 
                         do {
                             score1 = jugador1(j1, j2, score1, score2, op);
@@ -159,10 +173,12 @@ public class Ahorcado {
                         } while (maxscore < 3);
                         break;
                     case 4:
-                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        limpiarConsola();
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
                         j1 = teclado.next();
-                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
                         j2 = teclado.next();
+                        limpiarConsola();
 
                         do {
                             score1 = jugador1(j1, j2, score1, score2, op);
@@ -179,10 +195,12 @@ public class Ahorcado {
                         } while (maxscore < 3);
                         break;
                     case 5:
-                        System.out.print("Ingrese el nombre del jugador 1: ");
+                        limpiarConsola();
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
                         j1 = teclado.next();
-                        System.out.print("Ingrese el nombre del jugador 2: ");
+                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
                         j2 = teclado.next();
+                        limpiarConsola();
 
                         do {
                             score1 = jugador1(j1, j2, score1, score2, op);
@@ -205,10 +223,12 @@ public class Ahorcado {
                 System.out.println("Gracias por jugar\n");
                 System.out.println("Presiona enter para continuar...");
                 teclado.nextLine();
+                teclado.nextLine();
+
                 limpiarConsola();
                 System.out.println(
-                        "\t\t\t\tCréditos\n\n* Angel Alejandro Becerra Rojas\r\n* Christian Axel Moreno Flores\r\n* Andrés Aguilera");
-                System.out.println("Presiona enter para continuar...");
+                        "\t\t\t\tCréditos\n\n* Angel Alejandro Becerra Rojas\r\n* Christian Axel Moreno Flores\r\n* Andrés Aguilera Hernández");
+                System.out.println("\n\n Presiona enter para continuar...");
                 teclado.nextLine();
                 limpiarConsola();
                 System.exit(0);
@@ -228,17 +248,22 @@ public class Ahorcado {
     }
 
     private static int jugador1(String j1, String j2, int score1, int score2, int op) {
+
         int puntuacion = score1, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
-        String letra, PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
+        char letra;
+        String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "", defaultcolor = "\u001B[37m";
         boolean adivinado = false;
+
+        // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Turno de " + j1);
+        System.out.println("\u001B[32m" + "Turno de " + j1 +
+                "\n----------------------- \n" + defaultcolor);
 
         // Diccionario del juego
         String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja",
                 "mono" };
-        String[] frutas = { "manzana", "pera", "plátano", "naranja", "uva", "sandia", "melon", "fresa", "piña",
+        String[] frutas = { "manzana", "pera", "platano", "naranja", "uva", "sandia", "melon", "fresa", "mandarina",
                 "aguacate" };
         String[] nombres = { "juan", "maria", "jose", "ana", "luis", "isabel", "pedro", "paula", "miguel", "daniela" };
         String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp",
@@ -277,17 +302,29 @@ public class Ahorcado {
             }
 
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
+
             do {
                 System.out.print("Introduce una letra: ");
-                letra = teclado.next().toLowerCase();
+                String entrada = teclado.next().toLowerCase();
+                letra = entrada.charAt(0);
+                if (letrasIngresadas[letra - 'a']) {
+                    System.out.println("Ya has ingresado esa letra. Intenta con otra.");
+                    continue; // Vuelve al inicio del bucle sin procesar el resto del código
+                } else {
+                    letrasIngresadas[letra - 'a'] = true; // Marca la letra como ingresada
+                }
+
                 encontrados = actualizarFallos(PalabraAdivinar, letra);
                 if (encontrados == 0) {
                     fallos++;
                 }
-                Mensaje += "La palabra contiene " + encontrados + " '" + letra.charAt(0) + "' en la palabra buscada";
-                Mensaje += "\n" + "Te restan " + (6 - fallos) + " intentos";
+                // intento de verificacion de letras
+                Mensaje += "La palabra contiene " + encontrados + " '" + letra + "' en la palabra buscada";
+                if (encontrados == 0) {
+                    Mensaje += "\n" + "Te restan " + (6 - fallos) + " intentos";
+                }
                 letrasEncontradas = actualizarLetrasEncontradas(PalabraAdivinar, letra, letrasEncontradas);
-                Mensaje += "\n letras encontradas: " + letrasEncontradas;
+                Mensaje += "\nLetras encontradas: " + letrasEncontradas;
                 System.out.println(Mensaje);
                 Mensaje = "";
                 if (PalabraAdivinar.equals(letrasEncontradas)) {
@@ -303,28 +340,34 @@ public class Ahorcado {
                 System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
                 System.out.println("Puntuaciones \n" + j1 + " " + puntuacion + "\n" + j2 + " " + score2);
             }
-
+            Arrays.fill(letrasIngresadas, false);
         } while (adivinado == true && puntuacion < 3);
 
         return puntuacion;
     }
 
     private static int jugador2(String j1, String j2, int score1, int score2, int op) {
+
         int puntuacion = score2, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
-        String letra, PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "";
+        char letra;
+        String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "", defaultcolor = "\u001B[37m";
+        ;
         boolean adivinado = false;
+
+        // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Turno de " + j2);
+        System.out.println("\u001B[32m" + "Turno de " + j2 +
+                "\n----------------------- \n\n" + defaultcolor);
 
         // Diccionario del juego
         String[] animales = { "perro", "gato", "caballo", "vaca", "oveja", "pollo", "pez", "mariposa", "abeja",
                 "mono" };
-        String[] frutas = { "manzana", "pera", "platano", "naranja", "uva", "sandia", "melon", "fresa", "piña",
+        String[] frutas = { "manzana", "pera", "platano", "naranja", "uva", "sandia", "melon", "fresa", "mandarina",
                 "aguacate" };
         String[] nombres = { "juan", "maria", "jose", "ana", "luis", "isabel", "pedro", "paula", "miguel", "daniela" };
         String[] sitiosWeb = { "google", "youtube", "facebook", "twitter", "amazon", "netflix", "instagram", "whatsapp",
-                "mercadolibre", "reddit" };
+                "mercadolibre" };
         String[] ciudadesMexico = { "cdmx", "guadalajara", "monterrey", "puebla", "leon", "tijuana", "juarez", "merida",
                 "aguascalientes", "queretaro" };
 
@@ -359,17 +402,30 @@ public class Ahorcado {
             }
 
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
+
             do {
                 System.out.print("Introduce una letra: ");
-                letra = teclado.next().toLowerCase();
+                String entrada = teclado.next().toLowerCase();
+                letra = entrada.charAt(0);
+                if (letrasIngresadas[letra - 'a']) {
+                    System.out.println("Ya has ingresado esa letra. Intenta con otra.");
+                    continue; // Vuelve al inicio del bucle sin procesar el resto del código
+                } else {
+                    letrasIngresadas[letra - 'a'] = true; // Marca la letra como ingresada
+                }
+
                 encontrados = actualizarFallos(PalabraAdivinar, letra);
                 if (encontrados == 0) {
                     fallos++;
                 }
-                Mensaje += "La palabra contiene " + encontrados + " '" + letra.charAt(0) + "' en la palabra buscada";
-                Mensaje += "\n" + "Te restan " + (6 - fallos) + " intentos";
+                // intento de verificacion de letras
+
+                Mensaje += "La palabra contiene " + encontrados + " '" + letra + "' en la palabra buscada";
+                if (encontrados == 0) {
+                    Mensaje += "\n" + "Te restan " + (6 - fallos) + " intentos";
+                }
                 letrasEncontradas = actualizarLetrasEncontradas(PalabraAdivinar, letra, letrasEncontradas);
-                Mensaje += "\nletras encontradas: " + letrasEncontradas;
+                Mensaje += "\n letras encontradas: " + letrasEncontradas;
                 System.out.println(Mensaje);
                 Mensaje = "";
                 if (PalabraAdivinar.equals(letrasEncontradas)) {
@@ -385,7 +441,7 @@ public class Ahorcado {
                 System.out.println("Ganaste bro" + " llevas " + puntuacion + " puntos ");
                 System.out.println("Puntuaciones \n" + j1 + " " + score1 + "\n" + j2 + " " + puntuacion);
             }
-
+            Arrays.fill(letrasIngresadas, false);
         } while (adivinado == true && puntuacion < 3);
 
         return puntuacion;
@@ -399,21 +455,21 @@ public class Ahorcado {
         return letras;
     }
 
-    private static int actualizarFallos(String PalabraAdivinar, String letra) {
+    private static int actualizarFallos(String PalabraAdivinar, char letra) {
         int encontrado = 0;
         for (int i = 0; i < PalabraAdivinar.length(); i++) {
-            if (PalabraAdivinar.charAt(i) == letra.charAt(0)) {
+            if (PalabraAdivinar.charAt(i) == letra) {
                 encontrado++;
             }
         }
         return encontrado;
     }
 
-    private static String actualizarLetrasEncontradas(String PalabraAdivinar, String letra, String letrasEncontradas) {
+    private static String actualizarLetrasEncontradas(String PalabraAdivinar, char letra, String letrasEncontradas) {
         String actualizacionLetras = "";
         for (int i = 0; i < PalabraAdivinar.length(); i++) {
-            if (letra.charAt(0) == PalabraAdivinar.charAt(i)) {
-                actualizacionLetras += letra.charAt(0);
+            if (letra == PalabraAdivinar.charAt(i)) {
+                actualizacionLetras += letra;
             } else {
                 actualizacionLetras += letrasEncontradas.charAt(i);
             }
