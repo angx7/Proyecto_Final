@@ -526,4 +526,5 @@ public class Ahorcado {
         }
         return actualizacionLetras;
     }
+
 }
