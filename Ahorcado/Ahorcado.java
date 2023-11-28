@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Ahorcado {
+    private static Scanner teclado = new Scanner(System.in);
     private static boolean[] letrasIngresadas = new boolean[26];
 
     // Método para validar solo números
@@ -22,7 +23,6 @@ public class Ahorcado {
 
     // Método para válidar solo letras
     public static char Esletra() {
-        Scanner teclado = new Scanner(System.in);
         char inputChar;
         while (true) {
             String userInput = teclado.next();
@@ -38,7 +38,6 @@ public class Ahorcado {
     }
 
     public static void main(String[] args) {/// Void
-        Scanner teclado = new Scanner(System.in);
         int op;
         String defaultcolor = "\u001B[37m";
         limpiarConsola();
@@ -145,6 +144,7 @@ public class Ahorcado {
                                     maxscore = score2;
                                 }
                             } while (maxscore < 3);
+                            op = 1;
                             break;
                         case 2:
                             limpiarConsola();
@@ -169,6 +169,7 @@ public class Ahorcado {
                                     maxscore = score2;
                                 }
                             } while (maxscore < 3);
+                            op = 1;
                             break;
                         case 3:
                             limpiarConsola();
@@ -193,6 +194,7 @@ public class Ahorcado {
                                     maxscore = score2;
                                 }
                             } while (maxscore < 3);
+                            op = 1;
                             break;
                         case 4:
                             limpiarConsola();
@@ -217,6 +219,7 @@ public class Ahorcado {
                                     maxscore = score2;
                                 }
                             } while (maxscore < 3);
+                            op = 1;
                             break;
                         case 5:
                             limpiarConsola();
@@ -241,6 +244,7 @@ public class Ahorcado {
                                     maxscore = score2;
                                 }
                             } while (maxscore < 3);
+                            op = 1;
                             break;
                     }
                     break;
@@ -271,7 +275,8 @@ public class Ahorcado {
                         "\u001B[31m" + "\n\nSuerte para la proxima " + j1 + defaultcolor);
             }
             System.out.println("\n\n Presiona enter para continuar...");
-            teclado.nextLine(); teclado.nextLine();
+            teclado.nextLine();
+            teclado.nextLine();
             limpiarConsola();
         } while (op == 1);
     }
@@ -290,7 +295,6 @@ public class Ahorcado {
 
         // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
-        Scanner teclado = new Scanner(System.in);
         System.out.println("\u001B[32mTurno de " + j1 +
                 "\n----------------------- \n" + defaultcolor);
         System.out.println("\u001B[31mTienes 6 intentos\n" + defaultcolor);
@@ -398,7 +402,6 @@ public class Ahorcado {
 
         // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
         Random random = new Random();
-        Scanner teclado = new Scanner(System.in);
         System.out.println("\u001B[32m" + "Turno de " + j2 +
                 "\n----------------------- \n" + defaultcolor);
         System.out.println("\u001B[31m" + "Tienes " + (6) + " intentos\n" + defaultcolor);
