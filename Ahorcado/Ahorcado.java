@@ -3,6 +3,7 @@ package Ahorcado;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
+
 public class Ahorcado {
     private static boolean[] letrasIngresadas = new boolean[26];
 
@@ -38,12 +39,8 @@ public class Ahorcado {
 
     public static void main(String[] args) {/// Void
         Scanner teclado = new Scanner(System.in);
+        int op;
         String defaultcolor = "\u001B[37m";
-
-        int maxscore = 0;
-        int score1 = 0;
-        int score2 = 0;
-        String j1 = "", j2 = "";
         limpiarConsola();
         // Instrucciones de juego
         System.out.println("\u001B[36m"
@@ -67,207 +64,216 @@ public class Ahorcado {
         limpiarConsola();
 
         // Menú de inicio
-        System.out.println("\u001B[31m"
-                + " -------------------------------------------------------------------------------------\r\n"
-                +
-                "\t\t\t\tMenú\n\n 1. Iniciar\r\n" +
-                " 2. Cerrar\r\n\n"
-                + " -------------------------------------------------------------------------------------\r\n"
-                + defaultcolor);
-        String option = teclado.next();
-        while (!IsInteger(option)) {
-            System.out.print(
-                    "El valor ingresado no es un entero\n\nIntente nuevamente: ");
-            option = teclado.next();
-        }
-        int op = Integer.parseInt(option);
-        while (op == 0 || op > 2) {
-            System.out.println("Elige una opción válida");
-            option = teclado.next();
+        do {
+            int maxscore = 0;
+            int score1 = 0;
+            int score2 = 0;
+            String j1 = "", j2 = "";
+            System.out.println("\u001B[31m"
+                    + " -------------------------------------------------------------------------------------\r\n"
+                    +
+                    "\t\t\t\tMenú\n\n 1. Iniciar\r\n" +
+                    " 2. Cerrar\r\n\n"
+                    + " -------------------------------------------------------------------------------------\r\n"
+                    + defaultcolor);
+            String option = teclado.next();
             while (!IsInteger(option)) {
                 System.out.print(
                         "El valor ingresado no es un entero\n\nIntente nuevamente: ");
                 option = teclado.next();
             }
             op = Integer.parseInt(option);
-        }
-        switch (op) {
-            case 1:
-                limpiarConsola();
-                System.out.println("\u001B[32m"
-                        + " -------------------------------------------------------------------------------------\r\n"
-                        +
-                        "\t\t\t\tMenú de temáticas\n\n 1. Ciudades de México\r\n" +
-                        " 2. Animales\r\n 3. Frutas\r\n 4. Nombres de personas\r\n 5. Sitios Web\r\n\n"
-                        + " -------------------------------------------------------------------------------------\r\n"
-                        + defaultcolor);
+            while (op == 0 || op > 2) {
+                System.out.println("Elige una opción válida");
                 option = teclado.next();
                 while (!IsInteger(option)) {
-                    System.out.print("\u001B[31m" +
-                            "El valor ingresado no es un entero\n\nIntente nuevamente: " + defaultcolor);
+                    System.out.print(
+                            "El valor ingresado no es un entero\n\nIntente nuevamente: ");
                     option = teclado.next();
                 }
                 op = Integer.parseInt(option);
-                while (op == 0 || op > 5) {
-                    System.out.println("Elige una opción válida");
+            }
+            switch (op) {
+                case 1:
+                    limpiarConsola();
+                    System.out.println("\u001B[32m"
+                            + " -------------------------------------------------------------------------------------\r\n"
+                            +
+                            "\t\t\t\tMenú de temáticas\n\n 1. Ciudades de México\r\n" +
+                            " 2. Animales\r\n 3. Frutas\r\n 4. Nombres de personas\r\n 5. Sitios Web\r\n\n"
+                            + " -------------------------------------------------------------------------------------\r\n"
+                            + defaultcolor);
                     option = teclado.next();
                     while (!IsInteger(option)) {
-                        System.out.print(
-                                "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+                        System.out.print("\u001B[31m" +
+                                "El valor ingresado no es un entero\n\nIntente nuevamente: " + defaultcolor);
                         option = teclado.next();
                     }
                     op = Integer.parseInt(option);
-                }
+                    while (op == 0 || op > 5) {
+                        System.out.println("Elige una opción válida");
+                        option = teclado.next();
+                        while (!IsInteger(option)) {
+                            System.out.print(
+                                    "El valor ingresado no es un entero\n\nIntente nuevamente: ");
+                            option = teclado.next();
+                        }
+                        op = Integer.parseInt(option);
+                    }
 
-                switch (op) {
-                    case 1:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
-
-                        do {
+                    switch (op) {
+                        case 1:
                             limpiarConsola();
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
                             limpiarConsola();
-                            score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 2:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                        do {
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 2:
                             limpiarConsola();
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
                             limpiarConsola();
-                            score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 3:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                        do {
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 3:
                             limpiarConsola();
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
                             limpiarConsola();
-                            score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 4:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                        do {
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 4:
                             limpiarConsola();
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
                             limpiarConsola();
-                            score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                    case 5:
-                        limpiarConsola();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
-                        j1 = teclado.next();
-                        System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
-                        j2 = teclado.next();
-                        limpiarConsola();
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
 
-                        do {
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                        case 5:
                             limpiarConsola();
-                            score1 = jugador1(j1, j2, score1, score2, op);
-                            if (score1 == 3) {
-                                break;
-                            }
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 1: " + defaultcolor);
+                            j1 = teclado.next();
+                            System.out.print("\u001B[33m" + "Ingrese el nombre del jugador 2: " + defaultcolor);
+                            j2 = teclado.next();
                             limpiarConsola();
-                            score2 = jugador2(j1, j2, score1, score2, op);
 
-                            if (score2 < score1) {
-                                maxscore = score1;
-                            } else {
-                                maxscore = score2;
-                            }
-                        } while (maxscore < 3);
-                        break;
-                }
-                break;
-            case 2:
+                            do {
+                                limpiarConsola();
+                                score1 = jugador1(j1, j2, score1, score2, op);
+                                if (score1 == 3) {
+                                    break;
+                                }
+                                limpiarConsola();
+                                score2 = jugador2(j1, j2, score1, score2, op);
+
+                                if (score2 < score1) {
+                                    maxscore = score1;
+                                } else {
+                                    maxscore = score2;
+                                }
+                            } while (maxscore < 3);
+                            break;
+                    }
+                    break;
+                case 2:
+                    limpiarConsola();
+                    System.out.println("Gracias por jugar\n");
+                    System.out.println("Presiona enter para continuar...");
+                    teclado.nextLine();
+                    teclado.nextLine();
+
+                    limpiarConsola();
+                    System.out.println(
+                            "\t\t\t\tCréditos\n\n* Angel Alejandro Becerra Rojas\r\n* Christian Axel Moreno Flores\r\n* Andrés Aguilera Hernández");
+                    System.out.println("\n\n Presiona enter para continuar...");
+                    teclado.nextLine();
+                    limpiarConsola();
+                    System.exit(0);
+                    break;
+            }
+
+            if (score1 > score2) {
                 limpiarConsola();
-                System.out.println("Gracias por jugar\n");
-                System.out.println("Presiona enter para continuar...");
-                teclado.nextLine();
-                teclado.nextLine();
-
+                System.out.println("\u001B[33m" + "Gana el jugador 1\n\nFelicidades " + j1 +
+                        "\u001B[31m" + "\n\nSuerte para la proxima " + j2 + defaultcolor);
+            } else {
                 limpiarConsola();
-                System.out.println(
-                        "\t\t\t\tCréditos\n\n* Angel Alejandro Becerra Rojas\r\n* Christian Axel Moreno Flores\r\n* Andrés Aguilera Hernández");
-                System.out.println("\n\n Presiona enter para continuar...");
-                teclado.nextLine();
-                limpiarConsola();
-                System.exit(0);
-                break;
-        }
-
-        if (score1 > score2) {
+                System.out.println("\u001B[33m" + "Gana el jugador 2\n\nFelicidades " + j2 +
+                        "\u001B[31m" + "\n\nSuerte para la proxima " + j1 + defaultcolor);
+            }
+            System.out.println("\n\n Presiona enter para continuar...");
+            teclado.nextLine(); teclado.nextLine();
             limpiarConsola();
-            System.out.println("\u001B[33m" + "Gana el jugador 1\n\nFelicidades " + j1 +
-                    "\u001B[31m" + "\n\nSuerte para la proxima " + j2 + defaultcolor);
-        } else {
-            limpiarConsola();
-            System.out.println("\u001B[33m" + "Gana el jugador 2\n\nFelicidades " + j2 +
-                    "\u001B[31m" + "\n\nSuerte para la proxima " + j1 + defaultcolor);
-        }
+        } while (op == 1);
     }
 
     private static void limpiarConsola() {
