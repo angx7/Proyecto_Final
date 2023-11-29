@@ -85,7 +85,7 @@ public class Ahorcado {
                 option = teclado.next();
             }
             op = Integer.parseInt(option);
-            while (op == 0 || op > 2) {
+            while (op <= 0 || op > 2) {
                 System.out.println("Elige una opción válida");
                 option = teclado.next();
                 while (!IsInteger(option)) {
