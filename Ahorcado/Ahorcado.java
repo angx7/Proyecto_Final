@@ -7,6 +7,7 @@ import java.util.Random;
 public class Ahorcado {
     private static Scanner teclado = new Scanner(System.in);
     private static boolean[] letrasIngresadas = new boolean[26];
+    private static String defaultcolor = "\u001B[37m";
 
     // Método para validar solo números
     public static boolean IsInteger(String text) {
@@ -42,7 +43,6 @@ public class Ahorcado {
 
     public static void main(String[] args) {/// Void
         int op;
-        String defaultcolor = "\u001B[37m";
         limpiarConsola();
         // Instrucciones de juego
         System.out.println("\u001B[36m"
@@ -71,13 +71,7 @@ public class Ahorcado {
             int score1 = 0;
             int score2 = 0;
             String j1 = "", j2 = "";
-            System.out.println("\u001B[31m"
-                    + " -------------------------------------------------------------------------------------\r\n"
-                    +
-                    "\t\t\t\tMenú\n\n 1. Iniciar\r\n" +
-                    " 2. Cerrar\r\n\n"
-                    + " -------------------------------------------------------------------------------------\r\n"
-                    + defaultcolor);
+            menu();
             String option = teclado.next();
             while (!IsInteger(option)) {
                 System.out.print(
@@ -86,7 +80,9 @@ public class Ahorcado {
             }
             op = Integer.parseInt(option);
             while (op <= 0 || op > 2) {
-                System.out.println("Elige una opción válida");
+                limpiarConsola();
+                System.out.println("Elige una opción válida\n\n");
+                menu();
                 option = teclado.next();
                 while (!IsInteger(option)) {
                     System.out.print(
@@ -98,13 +94,8 @@ public class Ahorcado {
             switch (op) {
                 case 1:
                     limpiarConsola();
-                    System.out.println("\u001B[32m"
-                            + " -------------------------------------------------------------------------------------\r\n"
-                            +
-                            "\t\t\t\tMenú de temáticas\n\n 1. Ciudades de México\r\n" +
-                            " 2. Animales\r\n 3. Frutas\r\n 4. Nombres de personas\r\n 5. Sitios Web\r\n\n"
-                            + " -------------------------------------------------------------------------------------\r\n"
-                            + defaultcolor);
+
+                    menuTemas();
                     option = teclado.next();
                     while (!IsInteger(option)) {
                         System.out.print("\u001B[31m" +
@@ -113,7 +104,9 @@ public class Ahorcado {
                     }
                     op = Integer.parseInt(option);
                     while (op == 0 || op > 5) {
-                        System.out.println("Elige una opción válida");
+                        limpiarConsola();
+                        System.out.println("Elige una opción válida\n\n");
+                        menuTemas();
                         option = teclado.next();
                         while (!IsInteger(option)) {
                             System.out.print(
@@ -275,14 +268,16 @@ public class Ahorcado {
                 System.out.println("\u001B[33m" + "Gana el jugador 1\n\nFelicidades " + j1 +
                         "\u001B[31m" + "\n\nSuerte para la proxima " + j2 + defaultcolor);
                 System.out.println(
-                        "\u001B[36m" + "\n\tPuntuaciones Finales\u001B[33m \n\n\t " + j1 + "\t\t" + score1 + "\n\t " + j2
+                        "\u001B[36m" + "\n\tPuntuaciones Finales\u001B[33m \n\n\t " + j1 + "\t\t" + score1 + "\n\t "
+                                + j2
                                 + "\t\t" + score2 + defaultcolor);
             } else {
                 limpiarConsola();
                 System.out.println("\u001B[33m" + "Gana el jugador 2\n\nFelicidades " + j2 +
                         "\u001B[31m" + "\n\nSuerte para la proxima " + j1 + defaultcolor);
                 System.out.println(
-                        "\u001B[36m" + "\n\tPuntuaciones Finales\u001B[33m \n\n\t " + j1 + "\t\t" + score1 + "\n\t " + j2
+                        "\u001B[36m" + "\n\tPuntuaciones Finales\u001B[33m \n\n\t " + j1 + "\t\t" + score1 + "\n\t "
+                                + j2
                                 + "\t\t" + score2 + defaultcolor);
             }
             System.out.println("\n\n Presiona enter para continuar...");
@@ -290,6 +285,26 @@ public class Ahorcado {
             teclado.nextLine();
             limpiarConsola();
         } while (op == 1);
+    }
+
+    private static void menuTemas() {
+        System.out.println("\u001B[32m"
+                + " -------------------------------------------------------------------------------------\r\n"
+                +
+                "\t\t\t\tMenú de temáticas\n\n 1. Ciudades de México\r\n" +
+                " 2. Animales\r\n 3. Frutas\r\n 4. Nombres de personas\r\n 5. Sitios Web\r\n\n"
+                + " -------------------------------------------------------------------------------------\r\n"
+                + defaultcolor);
+    }
+
+    private static void menu() {
+        System.out.println("\u001B[31m"
+                + " -------------------------------------------------------------------------------------\r\n"
+                +
+                "\t\t\t\tMenú\n\n 1. Iniciar\r\n" +
+                " 2. Cerrar\r\n\n"
+                + " -------------------------------------------------------------------------------------\r\n"
+                + defaultcolor);
     }
 
     private static void limpiarConsola() {
@@ -301,7 +316,7 @@ public class Ahorcado {
 
         int puntuacion = score1, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
         char letra;
-        String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "", defaultcolor = "\u001B[37m";
+        String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "", tema = "";
         boolean adivinado = false;
 
         // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
@@ -319,32 +334,38 @@ public class Ahorcado {
                 "aguascalientes", "queretaro" };
 
         do {
-            System.out.println("\u001B[32mTurno de " + j1 +
-                    "\n----------------------- \n" + defaultcolor);
-            System.out.println("\u001B[31mTienes 6 intentos\n" + defaultcolor);
             adivinado = false;
             switch (op) {
                 case 1:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = ciudadesMexico[numeroAleatorio];
+                    tema = "Ciudades de México";
                     break;
                 case 2:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = animales[numeroAleatorio];
+                    tema = "Animales";
                     break;
                 case 3:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = frutas[numeroAleatorio];
+                    tema = "Frutas";
                     break;
                 case 4:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = nombres[numeroAleatorio];
+                    tema = "Nombres de personas";
                     break;
                 case 5:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = sitiosWeb[numeroAleatorio];
+                    tema = "Sitios Web";
                     break;
             }
+
+            System.out.println("\u001B[32mTurno de " + j1 +
+                    "\n----------------------- \n" + defaultcolor + "La temática de juego es: " + tema);
+            System.out.println("\n\u001B[31mTienes 6 intentos\n" + defaultcolor);
 
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
 
@@ -383,7 +404,7 @@ public class Ahorcado {
                 System.out.println("\u001B[31m" + "Fin de tu turno\n" + "\u001B[32m" + "\n\nLa palabra oculta era: "
                         + PalabraAdivinar + defaultcolor);
                 System.out.println(
-                        "\u001B[33m" + "\n\t   Puntuaciones \n\n\t" + j1 + "\t\t" + puntuacion + "\n\t" + j2
+                        "\u001B[33m" + "\n\t Puntuaciones \n\n\t" + j1 + "\t\t" + puntuacion + "\n\t" + j2
                                 + "\t\t" + score2 + defaultcolor);
                 System.out.println("\n\nPresiona enter para continuar...");
                 teclado.nextLine();
@@ -393,7 +414,7 @@ public class Ahorcado {
                 fallos = 0;
                 System.out.println("\u001B[33m" + "Felicidades acertaste\n" + defaultcolor);
                 System.out.println(
-                        "\u001B[36m" + "\t   Puntuaciones\u001B[33m \n\n\t" + j1 + "\t\t" + puntuacion + "\n\t" + j2
+                        "\u001B[36m" + "\t Puntuaciones\u001B[33m \n\n\t" + j1 + "\t\t" + puntuacion + "\n\t" + j2
                                 + "\t\t" + score2 + defaultcolor);
                 System.out.println("\n\nPresiona enter para continuar...");
                 teclado.nextLine();
@@ -409,7 +430,7 @@ public class Ahorcado {
 
         int puntuacion = score2, fallosPermitidos = 6, fallos = 0, encontrados, numeroAleatorio;
         char letra;
-        String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "", defaultcolor = "\u001B[37m";
+        String PalabraAdivinar = "", letrasEncontradas = "", Mensaje = "", tema = "";
         boolean adivinado = false;
 
         // letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
@@ -427,33 +448,38 @@ public class Ahorcado {
                 "aguascalientes", "queretaro" };
 
         do {
-            System.out.println("\u001B[32m" + "Turno de " + j2 +
-                    "\n----------------------- \n" + defaultcolor);
-            System.out.println("\u001B[31m" + "Tienes 6 intentos\n" + defaultcolor);
             adivinado = false;
             switch (op) {
                 case 1:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = ciudadesMexico[numeroAleatorio];
+                    tema = "Ciudades de México";
                     break;
                 case 2:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = animales[numeroAleatorio];
+                    tema = "Animales";
                     break;
                 case 3:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = frutas[numeroAleatorio];
+                    tema = "Frutas";
                     break;
                 case 4:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = nombres[numeroAleatorio];
+                    tema = "Nombres de personas";
                     break;
                 case 5:
                     numeroAleatorio = random.nextInt(10);
                     PalabraAdivinar = sitiosWeb[numeroAleatorio];
-
+                    tema = "Sitios Web";
                     break;
             }
+
+            System.out.println("\u001B[32mTurno de " + j2 +
+                    "\n----------------------- \n" + defaultcolor + "La temática de juego es: " + tema);
+            System.out.println("\n\u001B[31mTienes 6 intentos\n" + defaultcolor);
 
             letrasEncontradas = iniciarLetrasEncontradas(PalabraAdivinar.length());
 
@@ -490,7 +516,7 @@ public class Ahorcado {
             if (adivinado == false) {
                 System.out.println("\u001B[31m" + "Fin de tu turno\n" + "\u001B[32m" + "\n\nLa palabra oculta era: "
                         + PalabraAdivinar + defaultcolor);
-                System.out.println("\u001B[33m" + "\n\t   Puntuaciones \n\n\t" + j1 + "\t\t" + score1 + "\n\t" + j2
+                System.out.println("\u001B[33m" + "\n\t Puntuaciones \n\n\t" + j1 + "\t\t" + score1 + "\n\t" + j2
                         + "\t\t" + puntuacion + defaultcolor);
                 System.out.println("\n\nPresiona enter para continuar...");
                 teclado.nextLine();
@@ -500,7 +526,7 @@ public class Ahorcado {
                 fallos = 0;
                 System.out.println("\u001B[33m" + "Felicidades acertaste\n" + defaultcolor);
                 System.out.println(
-                        "\u001B[36m" + "\t   Puntuaciones\u001B[33m \n\n\t" + j1 + "\t\t" + score1 + "\n\t" + j2
+                        "\u001B[36m" + "\t Puntuaciones\u001B[33m \n\n\t" + j1 + "\t\t" + score1 + "\n\t" + j2
                                 + "\t\t" + puntuacion + defaultcolor);
                 System.out.println("\n\nPresiona enter para continuar...");
                 teclado.nextLine();
