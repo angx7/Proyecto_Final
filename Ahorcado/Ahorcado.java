@@ -29,9 +29,8 @@ public class Ahorcado {
     public static char Esletra() {
         char inputChar;
         while (true) {
-            String userInput = teclado.next();
-            if (userInput.length() == 1 && Character.isLetter(userInput.charAt(0))
-                    && Character.isLowerCase(userInput.charAt(0))) {
+            String userInput = teclado.next().toLowerCase();
+            if (userInput.length() == 1 && Character.isLetter(userInput.charAt(0))) {
                 inputChar = userInput.charAt(0);
                 break;
             } else {
